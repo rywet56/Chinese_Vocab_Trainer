@@ -3,6 +3,7 @@ sys.path.append('/Users/manuel/OneDrive/Chinese_Vocab_Trainer')
 from tkinter import *
 from random import shuffle
 from chinese_vocab_trainer.vocab import Vocab
+# from PIL import ImageTk, Image
 
 
 class Application:
@@ -39,6 +40,12 @@ class Application:
     def start_gui(self):
         root = Tk()
         root.title("Chinese Vocabulary Trainer")
+        root.resizable(0, 0)
+
+        # it works!!!!!!
+        img = PhotoImage(file='chin.png')
+        root.tk.call('wm', 'iconphoto', root._w, img)
+        # -------------------------
 
         mainframe = LabelFrame(root, text='', padx=0, pady=0, borderwidth=0)
         mainframe.pack(padx=20, pady=0)

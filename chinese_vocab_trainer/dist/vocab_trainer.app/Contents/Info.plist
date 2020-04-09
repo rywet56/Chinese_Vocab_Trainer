@@ -9,7 +9,7 @@
 	<key>CFBundleExecutable</key>
 	<string>vocab_trainer</string>
 	<key>CFBundleIconFile</key>
-	<string>PythonApplet.icns</string>
+	<string>chin.png</string>
 	<key>CFBundleIdentifier</key>
 	<string>org.pythonmac.unspecified.vocab_trainer</string>
 	<key>CFBundleInfoDictionaryVersion</key>

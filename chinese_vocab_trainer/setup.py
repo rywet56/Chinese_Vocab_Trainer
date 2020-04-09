@@ -9,7 +9,8 @@ from setuptools import setup
 
 APP = ['vocab_trainer.py']
 DATA_FILES = []
-OPTIONS = {}
+OPTIONS = {'argv_emulation': False,
+           'iconfile': 'chin.png'}
 
 setup(
     app=APP,
@@ -17,3 +18,4 @@ setup(
     options={'py2app': OPTIONS},
     setup_requires=['py2app'],
 )
+
