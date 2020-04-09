@@ -47,15 +47,6 @@ class Application:
         root.tk.call('wm', 'iconphoto', root._w, img)
         # -------------------------
 
-
-        # my_img = ImageTk.PhotoImage(Image.open("chin.png"))
-
-        # root.iconbitmap('/Users/manuel/OneDrive/Chinese_Vocab_Trainer/chinese_vocab_trainer/chin.icns')
-
-        # img = Image("photo", file="chin.png®")
-        # root.iconphoto(True, img) # you may also want to try this.
-        # root.tk.call('wm', 'iconphoto', root._w, img)
-
         mainframe = LabelFrame(root, text='', padx=0, pady=0, borderwidth=0)
         mainframe.pack(padx=20, pady=0)
 
