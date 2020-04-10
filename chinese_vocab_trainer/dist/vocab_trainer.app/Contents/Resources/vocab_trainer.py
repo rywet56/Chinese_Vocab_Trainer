@@ -29,6 +29,8 @@ class Application:
         self.low_limit = None
         self.up_limit = None
 
+        self.display = None
+
         self.buttons = {"start": None, "finish": None, "next": None, "reveal": None, "correct": None, "wrong": None}
         self.activity = {"start": False, "finish": False, "next": False, "reveal": False, "correct": True,
                          "wrong": True}
@@ -123,16 +125,20 @@ class Application:
         vocabframe.grid(row=0, column=1, padx=0, pady=20)
 
         self.chin = StringVar()
-        chin_label = Label(vocabframe, textvariable=self.chin, bg="lightgrey", width=20, font=("Helvetica", 30))
-        chin_label.grid(row=0, column=0, padx=5)
+        chin_label = Label(vocabframe, textvariable=self.chin, bg="#33455c", fg="white", width=20, font=("Helvetica", 35))
+        chin_label.grid(row=1, column=0, padx=5)
 
         self.pin = StringVar()
-        pin_label = Label(vocabframe, textvariable=self.pin, bg="lightgrey", width=20, font=("Helvetica", 30))
-        pin_label.grid(row=0, column=1, padx=5)
+        pin_label = Label(vocabframe, textvariable=self.pin, bg="#33455c", fg="white", width=20, font=("Helvetica", 35))
+        pin_label.grid(row=1, column=1, padx=5)
 
         self.eng = StringVar()
-        eng_label = Label(vocabframe, textvariable=self.eng, bg="lightgrey", width=20, font=("Helvetica", 30))
-        eng_label.grid(row=0, column=2, padx=5)
+        eng_label = Label(vocabframe, textvariable=self.eng, bg="#33455c", fg="white", width=20, font=("Helvetica", 35))
+        eng_label.grid(row=1, column=2, padx=5)
+
+        self.display = StringVar()
+        disp = Label(vocabframe, textvariable=self.display, bg="#f0e8eb", width=20, font=("Helvetica", 20))
+        disp.grid(row=0, column=1, pady=15)
 
         # ACTION FRAME
         actionframe = LabelFrame(trainingframe, text='', padx=0, pady=20, borderwidth=0)
@@ -186,7 +192,14 @@ class Application:
             self.buttons["next"].config(fg=self.but_active['next'])
 
     def next(self):
+
         if (self.activity["correct"] or self.activity["wrong"]) and self.activity["start"]:
+            # update display
+            if self.words_tested == self.num_words:
+                self.words_tested = 0
+            display_text = str(self.words_tested+1) + " / " + str(self.num_words) + "   of words"
+            self.set_display(display_text)
+
             print("Next")
             # changes self.current_word to a new word
             self.get_next_word()
@@ -254,7 +267,7 @@ class Application:
     def start_learning(self, file_path, box, direction, number, low_limit, up_limit):
         print("Start")
         """ This should initiate the underlying program """
-        # number_words_entry.get()
+
         self.vocab = Vocab(file_path)
         self.direction = self.get_direction(direction)
         self.box = int(box.split(" ")[1])
@@ -277,6 +290,10 @@ class Application:
 
         self.activity["correct"] = True
         self.activity["wrong"] = True
+
+        # set the display
+        display_text = str(self.words_tested) + " / " + str(self.num_words) + "   of words"
+        self.set_display(display_text)
 
     def finish(self, filepath):
         # Ensure that you can only finish the session and save it if the Start button has been pressed at least once
@@ -316,6 +333,10 @@ class Application:
             return "ec"
         elif direction == "Chinese -> English":
             return "ce"
+
+    def set_display(self, text):
+        """ sets the display to the text specifiedin text"""
+        self.display.set(text)
 
 
 if __name__ == "__main__":
